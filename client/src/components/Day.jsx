@@ -26,15 +26,25 @@ class Day extends React.Component {
 
   selectDateRange(val) {
     var selectedValue = val
-    console.log(selectedValue)
+    console.log(selectedValue); // correct val
     var obj = selectedValue
-    var selectedValueStr = selectedValue.date._d;
-    console.log(obj.date)
-    // console.log(selectedValueStr)
-    this.props.addDateToDatePicker(selectedValueStr);
+
+    this.props.addDateToDatePicker(obj);
   }
 
   render() {
+    const {
+      day,
+      day: {
+        date,
+        isCurrentMonth,
+        isToday,
+        number
+      },
+      select,
+      selected
+    } = this.props;
+
     return (
       <DayRow>
         <span
@@ -42,6 +52,7 @@ class Day extends React.Component {
           className={"day" + (this.props.day.isToday ? " today" : "") + (this.props.day.isCurrentMonth ? "" : " different-month") + (this.props.day.date.isSame(this.props.selected) ? " selected" : "")}
           // onClick={() => select(this.day)}
           // onClick={() => this.selectDateRange(this.props.day)}
+          onClick={() => select(day)}
           onClick={() => this.selectDateRange(this.props.day)}
         >{this.props.day.number}</span>
       </DayRow>

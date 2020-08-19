@@ -33,23 +33,25 @@ export default class Week extends React.Component {
   //   console.log(dateRange, num, haha);
   // }
   render() {
-    let days = [];
+    // let days = [];
     // let { date } = this.props;
     // const { month, selected, select } = this.props;
+    let days = [];
+    let { date } = this.props;
 
+    const { month, selected, select } = this.props;
     for (var i = 0; i < 7; i++) {
       var haha = 1
       var day = {
-        name: this.props.date.format("dd").substring(0, 1),
-        number: this.props.date.date(),
-        isCurrentMonth: this.props.date.month() === this.props.month.month(),
-        isToday: this.props.date.isSame(new Date(), "day"),
-        date: this.props.date
+        name: date.format("dd").substring(0, 1),
+        number: date.date(),
+        isCurrentMonth: date.month() === month.month(),
+        isToday: date.isSame(new Date(), "day"),
+        date: date
       };
       days.push(
         <DayTd key={day.date}>
           <Day
-            haha={haha}
             day={day}
             selected={this.props.selected}
             select={this.props.select}
@@ -59,7 +61,10 @@ export default class Week extends React.Component {
       );
       // console.log(days[0])
       // this.props.date = this.props.date.clone();
-      this.props.date.add(1, "day");
+      // this.props.date = this.props.date.clone();
+      // this.props.date.add(1, "day");
+      date = date.clone();
+      date.add(1, "day");
     }
     return (
       <tr key={days}
@@ -68,4 +73,5 @@ export default class Week extends React.Component {
       </tr>
     );
   }
+
 }

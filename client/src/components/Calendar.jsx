@@ -38,40 +38,28 @@ export default class Calendar extends React.Component {
     this.state = {
       month: moment(),
       selected: moment().startOf('day'),
-      dateRange: []
+      dateRange: [],
     };
-
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
     this.addDateToDatePicker = this.addDateToDatePicker.bind(this);
   }
 
   addDateToDatePicker(dateRanges) {
-    console.log(dateRanges);
-    // var newState = this.state.dateRange.push(dateRange);
-    // this.setState({
-    // dateRange: [...this.state.dateRange, dateRanges]
-    // })
-    // console.log(this.state.dateRange)
+    console.log(dateRanges, typeof dateRanges); // correct;
+    // moment("01-01-2000 23:45", "DD-MM-YYYY HH:MM")
+    console.log(moment(dateRanges))
   }
 
   previous() {
-    const {
-      month,
-    } = this.state;
-
     this.setState({
-      month: month.subtract(1, 'month'),
+      month: this.state.month.subtract(1, 'month'),
     });
   }
 
   next() {
-    const {
-      month,
-    } = this.state;
-
     this.setState({
-      month: month.add(1, 'month'),
+      month: this.state.month.add(1, 'month'),
     });
   }
 
@@ -121,6 +109,13 @@ export default class Calendar extends React.Component {
 
     return <span className="month-label">{month.format("MMMM YYYY")}</span>;
   }
+  renderCurrentMonthLabel() {
+    const {
+      month,
+    } = this.state;
+    var currentMonth = this.state.month
+    return <span className="month-label">{currentMonth.format("MMMM YYYY")}</span>;
+  }
   renderNextMonthLabel() {
     const {
       month,
@@ -143,7 +138,10 @@ export default class Calendar extends React.Component {
         <SectionDiv>
           <SectionLeft>
             <header>
-              <h2>{this.renderMonthLabel()}</h2>
+              <h1>{this.renderCurrentMonthLabel()}</h1>
+              <button onClick={this.previous} />
+              {/* {this.renderMonthLabel()} */}
+              <button onClick={this.next} />
               <table>
                 <tbody>
                   <DayNames />
@@ -176,7 +174,7 @@ export default class Calendar extends React.Component {
             </div>
           </SectionRight>
         </SectionDiv>
-      </ModalCalendarDiv>
+      </ModalCalendarDiv >
     );
   }
 }

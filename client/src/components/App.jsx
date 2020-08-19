@@ -3,10 +3,11 @@ import moment from 'moment';
 import './App';
 import Form from './Form.jsx';
 import Header from './Header.jsx'
-// import Calendar from './Calendar.jsx';
+import Calendar from './Calendar.jsx';
 import styled from 'styled-components';
 
 const MainDiv = styled.div`
+margin: 0 auto;
 --page-shell-max-content-width: 1280px;
 color: #222222 !important;
 display: block !important;
